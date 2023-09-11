@@ -1,0 +1,15 @@
+name: Build Docker Image
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: DeterminateSystems/nix-installer-action@main
+      - run: nix-shell -p nix-info --run "nix-info -m"
+      - name: Build & Push
+        run: nix run .#ci
