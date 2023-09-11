@@ -14,6 +14,4 @@ jobs:
       - run: nix-shell -p nix-info --run "nix-info -m"
       - name: Build tarball
         run: |
-          nix build -L '.#hello-docker'
-          ./result > docker.tar.gz
-          du -sh docker.tar.gz
+          nix run -L '.#ci'
