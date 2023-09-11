@@ -11,5 +11,8 @@ jobs:
       - uses: actions/checkout@master
       - uses: DeterminateSystems/nix-installer-action@main
       - run: nix-shell -p nix-info --run "nix-info -m"
-      - name: Build & Push
-        run: nix run .#ci
+      - name: Build tarball
+        run: |
+          nix build '.#hello-docker'
+          ./result > docker.tar.gz
+          du -sh docker.tar.gz
